@@ -4,7 +4,7 @@ const session = require('express-session');
 const authRoutes = require('../routes/auth');
 
 const app = express();
-app.use(express.urlencoded({ extended: true })); // 'extended: true' ermöglicht komplexere Datenstrukturen
+app.use(express.urlencoded({ extended: true })); 
 app.use(session({
   secret: 'test_secret_key',
   resave: false,
@@ -16,7 +16,7 @@ describe('Authentication tests', () => {
   it('should login successfully with valid credentials', async () => {
     const response = await request(app)
       .post('/auth/login')
-      .type('form') // Setze den Content-Type Header auf 'application/x-www-form-urlencoded'
+      .type('form') 
       .send({ username: 'user1', password: 'password1' });
 
     console.log('Response Status:', response.status);
@@ -27,7 +27,7 @@ describe('Authentication tests', () => {
   it('should fail login with invalid credentials', async () => {
     const response = await request(app)
       .post('/auth/login')
-      .type('form') // Setze den Content-Type Header auf 'application/x-www-form-urlencoded'
+      .type('form') 
       .send({ username: 'user1', password: 'wrongpassword' });
 
     expect(response.status).toBe(401);
@@ -38,7 +38,7 @@ describe('Authentication tests', () => {
     const agent = request.agent(app);
     await agent
       .post('/auth/login')
-      .type('form') // Setze den Content-Type Header auf 'application/x-www-form-urlencoded'
+      .type('form') 
       .send({ username: 'user1', password: 'password1' });
 
     const response = await agent.get('/auth/protected');
@@ -57,7 +57,7 @@ describe('Authentication tests', () => {
     const agent = request.agent(app);
     await agent
       .post('/auth/login')
-      .type('form') // Setze den Content-Type Header auf 'application/x-www-form-urlencoded'
+      .type('form') 
       .send({ username: 'user1', password: 'password1' });
 
     const response = await agent.post('/auth/logout');
